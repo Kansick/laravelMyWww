@@ -1,4 +1,5 @@
-@import 'tailwindcss';
+/* Идет в комплекте с Laravel, надо как нибудь попробовать */
+/* @import 'tailwindcss'; */
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,4 +9,80 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+[data-bs-theme="dark"] body {
+    background-color: #0A0A0A;
+    color: #a1a09a;
+}
+
+.bg-dark-custom {
+    background-color: #161615 !important;
+}
+
+@media (min-width: 1400px) {
+    /* Показываем под меню при наведении */
+    .nav-item.dropdown:hover > .dropdown-menu {
+        display: block !important;
+        margin-top: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Цвет пункта меню при наведении */
+    .nav-item.dropdown:hover > .nav-link {
+        color: #A52A2A !important;
+    }
+    
+    /* Цвет под пункта меню при наведении */
+    .nav-item.dropdown:hover > .dropdown-menu .dropdown-item:hover {
+        color: #A52A2A !important;
+        background-color: transparent;
+    }
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 10px;
+    transition: color 0.2s ease;
+}
+
+
+.navbar-dark .navbar-nav .nav-link  {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 10px;
+    transition: color 0.2s ease;
+}
+
+[data-bs-theme="dark"] .dropdown-item {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    padding: 8px 20px;
 }
