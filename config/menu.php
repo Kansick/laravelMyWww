@@ -19,6 +19,12 @@ return [
                     'url' => '/services/calc/',
                     'active' => true
                 ],
+                [
+                    'type' => 'child',
+                    'title' => 'Пароли',
+                    'url' => '/services/passwords/',
+                    'active' => true
+                ]
             ],
         ],
     ],

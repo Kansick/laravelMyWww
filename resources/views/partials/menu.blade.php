@@ -36,7 +36,7 @@
     @if($isActive)
         @if(!$hasDropdown)
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ $item['url'] ?? '#' }}">{{ $item['title'] ?? "NOT FOUND" }}</a>
+                <a class="nav-link" aria-current="page" href="{{ $item['url'] ?? '#' }}">{{ $item['title'] ?? "NOT FOUND" }}</a>
             </li>
         @endif
         @if($hasDropdown)

@@ -1,10 +1,10 @@
 @extends('layouts.main.main')
 
 {{-- 2. Задаем заголовок страницы (опционально) --}}
-@section('title', 'Главная')
+@section('title', 'Сервисы')
 
-@section('header-page-main', 'Мой сайт сервис')
-@section('sub-header-page-main', 'Здесь хранятся все нужные инструменты для оптимизации руттиных задач')
+@section('header-page-main', 'Сервисы')
+@section('sub-header-page-main', 'Здесь можно посмотреть все сервисы которые можно использовать')
 
 {{-- 3. Пишем контент, который вставится вместо @yield('content') в макете --}}
 @section('content')
