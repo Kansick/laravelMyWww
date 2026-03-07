@@ -16,6 +16,12 @@
     @include('partials.menu', ['menuItems' => config('menu.navbar')])
 
     <main class="flex-grow-1" style="padding-top: 56px;">
+        <section class="bg-dark-custom text-white d-flex align-items-center justify-content-center" style="min-height: 400px;">
+            <div class="text-center">
+                <h1 class="display-4 fw-bold mb-3">@yield('header-page-main')</h1>
+                <p class="lead text-white-50">@yield('sub-header-page-main')</p>
+            </div>
+        </section>
         @yield('content')
     </main>
 
@@ -23,7 +29,7 @@
         <div class="container-fluid px-0">
             <div class="d-flex align-items-center justify-content-end h-100 pe-4" style="min-height: 100px;">
                 <span class="text-white-50 small">
-                    2026 @ Все права защищены
+                    {{ date('Y') }} @ Все права защищены
                 </span>
             </div>
         </div>
