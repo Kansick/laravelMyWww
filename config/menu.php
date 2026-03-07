@@ -16,7 +16,7 @@ return [
                 [
                     'type' => 'child',
                     'title' => 'Расчёт аренды',
-                    'url' => '/services/calc/',
+                    'url' => '/services/rent/',
                     'active' => true
                 ],
                 [

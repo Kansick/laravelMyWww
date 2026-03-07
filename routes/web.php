@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RentController;
 
 Route::get('/', function () {
     return view('index');
@@ -13,7 +14,5 @@ Route::prefix('services')->group(function () {
     Route::get('/passwords', function () {
         return view('services.passwords.index');
     });
-    Route::get('/calc', function () {
-        return view('services.calc.index');
-    });
+    Route::get('/rent', [RentController::class, 'index'])->name('rent.index');
 });

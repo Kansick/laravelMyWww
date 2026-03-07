@@ -86,3 +86,33 @@
     color: #ffffff !important;
     padding: 8px 20px;
 }
+
+.border-red {
+    border: 2px solid #A52A2A !important;
+}
+
+.btn-outline-red {
+    border: 2px solid #ffffff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    line-height: 2 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    transition: 0.2s;
+}
+
+.btn-outline-red:hover {
+    border: 2px solid #A52A2A !important;
+    color: #A52A2A !important;
+}
+
+.card-custom-hover {
+    border: 2px solid transparent !important;
+    transition: 0.2s;
+}
+
+.card-custom-hover:hover {
+    border: 2px solid #A52A2A !important;
+}

@@ -16,7 +16,7 @@
     @include('partials.menu', ['menuItems' => config('menu.navbar')])
 
     <main class="flex-grow-1" style="padding-top: 56px;">
-        <section class="bg-dark-custom text-white d-flex align-items-center justify-content-center" style="min-height: 400px;">
+        <section class="bg-dark-custom text-white d-flex align-items-center justify-content-center" style="min-height: 300px;">
             <div class="text-center">
                 <h1 class="display-4 fw-bold mb-3">@yield('header-page-main')</h1>
                 <p class="lead text-white-50">@yield('sub-header-page-main')</p>
