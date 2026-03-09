@@ -12,8 +12,11 @@
     {{-- Обернули весь блок в section с отступом mt-5 --}}
     <section class="mt-5 mb-5">
         <div class="container" style="max-width: 1200px;">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="text-white mb-0">Отчеты по аренде</h1>
+            <div class="d-flex justify-content-start align-items-center mb-4">
+                <h1 class="text-white mb-0">Отчеты по аренде
+                    <span class="text-muted ms-2 fs-5">последние 15 записей</span>
+                    <a href="" class="btn-create-rent btn btn-outline-red ms-2">Создать отчет</a>
+                </h1>
             </div>
 
             @if($records->isEmpty())
@@ -35,7 +38,8 @@
                                     <div class="card h-100 bg-dark-custom card-custom-hover">
                                         <div class="card-body">
                                             <h5>{{ $item->title ?? "NOT FOUND" }}</h5>
-                                            <p>Дата создания: {{ $item->date_create->format('d.m.Y') }}</p>
+                                            <p class="fw-bold fs-5 text-uppercase">{{ $item->date_create->locale('ru')->isoFormat('DD MMMM YYYY') }}</p>
+                                            
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-white-50 small">Итого:</span>
                                                 <span class="text-success fw-bold fs-5">
@@ -43,14 +47,23 @@
                                                 </span>
                                             </div>
                                             <hr class="border-secondary my-2">
-                                            <a href="#" class="btn btn-outline-red w-100 mt-3 btn-sm">Подробнее</a>
+                                            <a href="#" class="btn btn-outline-red w-100 mt-3 btn-sm btn-open-rent-modal"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#rentModalGlobal"
+                                                data-id="{{ $item->id }}">Подробнее</a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                             @if($loop->last && $chunk->count() < $chunksRows)
                                 @for($i = $chunk->count(); $i < 3; $i++)
-                                    <div class="col-md-4 d-none d-md-block"></div>
+                                    <div class="col-md-4">
+                                        <div class="card h-100 bg-dark-custom card-custom-hover">
+                                            <div class="card-body d-flex justify-content-center align-items-center btn-create-rent">
+                                                <h5 class="text-white">Создать отчет</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endfor
                             @endif
                             </div>
@@ -82,5 +95,71 @@
 
 {{-- Сюда вставляется script теги для main.blade.php --}}
 @push('scripts')
-   
+   @vite(['resources/js/rent_index.js'])
 @endpush
+
+
+{{-- МОДАЛКА (Одна на всех, внутри контент-плейсхолдеры) --}}
+<div class="modal fade" id="rentModalGlobal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark-custom border-secondary">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-white fw-bold" id="modalTitle">Загрузка...</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body text-white">
+                {{-- Индикатор загрузки --}}
+                <div id="modalLoader" class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Загрузка...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Получаем данные...</p>
+                </div>
+
+                {{-- Контент (скрыт пока не загрузится) --}}
+                <div id="modalContent" style="display:none;">
+                    <div class="row g-4">
+                        <!-- Постоянные расходы -->
+                        <div class="col-md-12">
+                            <div id="attributesList">
+                                
+                            </div>
+                        </div>
+
+                        <!-- Счетчики -->
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-dark table-sm border-secondary">
+                                    <thead>
+                                        <tr class="small">
+                                            <th class="text-uppercase fw-bold" style="width: 1%;">Счетчики</th>
+                                            <th class="text-uppercase fw-bold" style="width: 1%;">Тариф</th>
+                                            <th class="text-uppercase fw-bold" style="width: 1%;">Начало</th>
+                                            <th class="text-uppercase fw-bold" style="width: 1%;">Конец</th>
+                                            <th class="text-uppercase fw-bold" style="width: 1%;">Расход</th>
+                                            <th class="text-uppercase fw-bold" style="width: 1%;">Сумма</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody"></tbody>
+                                </table>
+                            </div>
+                            <span class="text-white d-flex justify-content-start">
+                                <span>Сумма:</span>
+                                <span class="tableSum fw-bold ms-2"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer border-secondary">
+                <div class="me-auto">
+                    <span class="text-white-50 small d-block">Итоговая сумма:</span>
+                    <span class="text-success fw-bold fs-4" id="modalTotalSum">0 ₽</span>
+                </div>
+                <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>

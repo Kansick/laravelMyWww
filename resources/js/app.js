@@ -10,6 +10,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
 // Ждем полной загрузки DOM
 document.addEventListener('DOMContentLoaded', function () {
     const dropdownTriggerList = document.querySelectorAll('[data-bs-toggle="dropdown"]');

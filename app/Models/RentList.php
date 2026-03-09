@@ -15,8 +15,7 @@ class RentList extends Model
         'attributes',
         'propertys',
         'propertys_values',
-        'result_sum',
-        'discrepancy'
+        'result_sum'
     ];
 
     // 2. Автоматическое преобразование типов данных
@@ -25,7 +24,6 @@ class RentList extends Model
         'result_sum'  => 'decimal:2', // Гарантирует 2 знака после запятой (например, "1500.50")
         'attributes'       => 'array', // превращает массив PHP в JSON и наоборот PHP ARRAY <=> JSON
         'propertys'        => 'array',
-        'propertys_values' => 'array',
-        'discrepancy' => 'array',
+        'propertys_values' => 'array'
     ];
 }

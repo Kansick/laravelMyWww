@@ -35,4 +35,5 @@
         </div>
     </footer>
 </body>
+@stack('scripts')
 </html>
