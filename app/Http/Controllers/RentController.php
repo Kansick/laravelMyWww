@@ -33,4 +33,23 @@ class RentController extends Controller
             'propertys_values' => $record->propertys_values,
         ]);
     }
+
+    //Получаем запись последнюю
+    public function getLast()
+    {
+        $record = RentList::orderBy('date_create', 'desc')->first();
+
+        if (!$record) {
+            return response()->json([]);
+        }
+
+        return response()->json([
+            'title' => $record->title,
+            'date_create' => $record->date_create->locale('ru')->translatedFormat('j F Y'),
+            'result_sum' => $record->result_sum,
+            'attributes' => $record->attributes,
+            'propertys' => $record->propertys,
+            'propertys_values' => $record->propertys_values,
+        ]);
+    }
 }

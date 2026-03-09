@@ -17,4 +17,6 @@ Route::prefix('services')->group(function () {
     Route::get('/rent', [RentController::class, 'index'])->name('rent.index');
 });
 
+Route::get('/api/rent/last', [RentController::class, 'getLast'])->name('api.rent.show.last');
 Route::get('/api/rent/{id}', [RentController::class, 'getRecord'])->name('api.rent.show');
+
