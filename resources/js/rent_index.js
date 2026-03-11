@@ -151,8 +151,49 @@ $(document).ready(function(){
         let totalSum = $(modal['totalSum']);
         let tableSum = $(modal['tableSum']);
 
-        if(!$.isEmptyObject(data)){
-            alert('not empty');
+        tableBody.empty();
+        attrList.empty();
+        totalSum.empty();
+        tableSum.empty();
+        $('.summAttr').empty();
+        if(data && typeof data === 'object' && Object.keys(data).length > 0){
+            if (data.attributes) {
+                Object.entries(data.attributes).forEach(([key, value]) => {
+                    attrList.prepend(`
+                        <span class="text-white d-flex justify-content-start attrLine">
+                            <input type="text" class="form-control key me-2 mt-2 bg-dark-custom" placeholder="Ключ" value="${key}">
+                            <input type="text" class="form-control value mt-2 bg-dark-custom" placeholder="Значение" value="${value}">
+                        </span>
+                    `);
+                    recalculateRent(modal);
+                    attrList.find('.key, .value').off().on('input', function(){
+                        recalculateRent(modal);
+                    });
+                });
+            }
+            if (data.propertys && data.propertys_values) {
+                Object.entries(data.propertys).forEach(([key, value]) => {
+                    let end = 0;
+                    Object.entries(data.propertys_values).forEach(([keyValues, valueValues]) => {
+                        if(keyValues == key){
+                            end = valueValues.end;
+                        }
+                    });
+                    tableBody.append(`
+                        <tr class="propertyLine">
+                            <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate" id="name" placeholder="Счетчики" value="${key}"></td>
+                            <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate floats" id="tariff" placeholder="Тариф" value="${value}"></td>
+                            <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate floats" id="start" placeholder="Начало" value="${end}"></td>
+                            <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate floats" id="end" placeholder="Конец"></td>
+                            <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom" id="diff" placeholder="0" disabled></td>
+                            <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom" id="summ" placeholder="0 ₽" disabled></td>
+                        </tr>
+                    `);
+                    tableBody.find('.table_recalculate').off().on('input', function(){
+                        recalculateRent(modal);
+                    });
+                });
+            }
         }
 
         $('#btnAddAttr').off().on('click', function(){
@@ -170,36 +211,41 @@ $(document).ready(function(){
 
         $('#btnRemoveAttr').off().on('click', function(){
             attrList.find('.attrLine').last().remove();
+            recalculateRent(modal);
         });
 
         $('#btnTableLineAdd').off().on('click', function(){
             tableBody.append(`
                 <tr class="propertyLine">
-                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom name" placeholder="Счетчики"></td>
-                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom tariff" placeholder="Тариф"></td>
-                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom start" placeholder="Начало"></td>
-                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom end" placeholder="Конец"></td>
-                    <td class="bg-dark-custom"></td>
-                    <td class="bg-dark-custom"></td>
+                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate" id="name" placeholder="Счетчики"></td>
+                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate floats" id="tariff" placeholder="Тариф"></td>
+                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate floats" id="start" placeholder="Начало"></td>
+                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom table_recalculate floats" id="end" placeholder="Конец"></td>
+                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom" id="diff" placeholder="0" disabled></td>
+                    <td class="bg-dark-custom"><input type="text" class="form-control bg-dark-custom" id="summ" placeholder="0 ₽" disabled></td>
                 </tr>
             `);
-            tableBody.find('.name, .tariff, .start, .end').off().on('input', function(){
+            tableBody.find('.table_recalculate').off().on('input', function(){
                 recalculateRent(modal);
             });
         });
 
         $('#btnTableLineRemove').off().on('click', function(){
             tableBody.find('.propertyLine').last().remove();
+            recalculateRent(modal);
         });
 
         $('#btnCreate').off().on('click', function(){
-
+            if(title.val().trim().length !== 0){
+                //отсюда
+            }else{
+                alert("Заполни название");
+            }
         })
     }
 
     function recalculateRent(modal)
     {
-        let title = $(modal['title']);
         let attrList = $(modal['attrList']);
         let tableBody = $(modal['tableBody']);
         let totalSum = $(modal['totalSum']);
@@ -222,10 +268,40 @@ $(document).ready(function(){
         }); 
         $('.summAttr').text(formatMoney(sumAttr) + ' ₽');
         totalSum.text(formatMoney(sumAll) + ' ₽');
-
-        tableBody.find('.tariff').toArray().forEach((tariff) => {
-
+        let sumTable = 0;
+        tableBody.find('.propertyLine').toArray().forEach((lineTable) => {
+            let fieldsInput = $(lineTable).find('.table_recalculate').toArray();
+            if(Array.isArray(fieldsInput) && fieldsInput.length > 0){
+                let countMatch = fieldsInput.length;
+                let countMatchResult = 0;
+                fieldsInput.forEach(input => {
+                    if($(input).val().trim().length !== 0) countMatchResult++;
+                });
+                if(countMatch == countMatchResult){
+                    let start = 0;
+                    let end = 0;
+                    let tariff = 0;
+                    fieldsInput.forEach(input => {
+                        if($(input).attr('id') == 'start') start = parseFloat($(input).val().trim().replace(',','.'));
+                        if($(input).attr('id') == 'end') end = parseFloat($(input).val().trim().replace(',','.'));
+                        if($(input).attr('id') == 'tariff') tariff = parseFloat($(input).val().trim().replace(',','.'));
+                    });
+                    let diff = end - start;
+                    let summ = diff * tariff;
+                    
+                    $(lineTable).find('#diff').val(diff.toFixed(2));
+                    $(lineTable).find('#summ').val(summ.toFixed(2));
+                    
+                    sumAll += summ;
+                    sumTable += summ;
+                }else{
+                    $(lineTable).find('#diff').val(0);
+                    $(lineTable).find('#summ').val(0);
+                }
+            }
         });
+        totalSum.text(formatMoney(sumAll.toFixed(2)) + ' ₽');
+        tableSum.text(formatMoney(sumTable.toFixed(2)) + ' ₽');
     }
 });
 
