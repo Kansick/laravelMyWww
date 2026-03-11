@@ -15,7 +15,6 @@
             <div class="d-flex justify-content-start align-items-center mb-4">
                 <h1 class="text-white mb-0">Отчеты по аренде
                     <span class="text-muted ms-2 fs-5">последние 15 записей</span>
-                    <a href="" class="btn-create-rent btn btn-outline-red ms-2" data-bs-toggle="modal" data-bs-target="#rentCreate">Создать отчет</a>
                 </h1>
             </div>
 
@@ -90,22 +89,23 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="d-flex justify-content-center align-items-center mt-4">
                 @if($chunks->count() > 1)
-                <div class="d-flex justify-content-end align-items-center mt-4">
-                    <button class="btn bg-dark-custom d-flex align-items-center justify-content-center me-2" type="button" data-bs-target="#rentCarousel" data-bs-slide="prev" 
-                        style="width: 50px; height: 30px;">
+                    <a href="" class="btn btn-outline-red ms-2 me-2" type="button" data-bs-target="#rentCarousel" data-bs-slide="prev">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                         </svg>
-                    </button>
-                    <button class="btn bg-dark-custom d-flex align-items-center justify-content-center" type="button" data-bs-target="#rentCarousel" data-bs-slide="next"
-                            style="width: 50px; height: 30px;">
+                    </a>
+                @endif
+                    <a href="" class="btn-create-rent btn btn-outline-red ms-2 me-2" data-bs-toggle="modal" data-bs-target="#rentCreate">Создать отчет</a>
+                @if($chunks->count() > 1)
+                    <a href="" class="btn btn-outline-red ms-2 me-2" type="button" data-bs-target="#rentCarousel" data-bs-slide="next">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                         </svg>
-                    </button>
-                </div>
+                    </a>
                 @endif
+                </div>
             </div>
             @endif
         </div>
@@ -163,7 +163,7 @@
                             </div>
                             <span class="text-white d-flex justify-content-start">
                                 <span>Сумма:</span>
-                                <span class="tableSum fw-bold ms-2"></span>
+                                <span id="tableSum" class="fw-bold ms-2"></span>
                             </span>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                             </span>
                             <span class="text-white d-flex justify-content-start mt-2">
                                 <span>Сумма:</span>
-                                <span class="tableSum fw-bold ms-2"></span>
+                                <span id="tableSum" class="fw-bold ms-2"></span>
                             </span>
                         </div>
                     </div>
@@ -248,7 +248,6 @@
                     <span class="text-white-50 small d-block">Итоговая сумма:</span>
                     <span class="text-success fw-bold fs-4" id="modalTotalSum">0 ₽</span>
                 </div>
-                <button type="button" class="btn btn-outline-red" id="btnCalc">Посчитать</button>
                 <button type="button" class="btn btn-outline-red" id="btnCreate">Создать</button>
                 <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Закрыть</button>
             </div>

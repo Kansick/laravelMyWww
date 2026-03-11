@@ -12,6 +12,7 @@ $(document).ready(function(){
             'attrList': $(modal).find('#attributesList'),
             'tableBody': $(modal).find('#tableBody'),
             'totalSum': $(modal).find('#modalTotalSum'),
+            'tableSum': $(modal).find('#tableSum')
         }
         modalBootstrap['#' + $(modal).attr('id')] = new bootstrap.Modal(modal);
     });
@@ -49,6 +50,7 @@ $(document).ready(function(){
         let attrList = $(modal['attrList']);
         let tableBody = $(modal['tableBody']);
         let totalSum = $(modal['totalSum']);
+        let tableSum = $(modal['tableSum']);
 
         title.text(data.title || 'NOT FOUND');
 
@@ -98,7 +100,7 @@ $(document).ready(function(){
                     `);
                 }
             });
-            $('.tableSum').html(`${(sumTable).toFixed(2)} ₽`);
+            tableSum.html(`${(sumTable).toFixed(2)} ₽`);
         } else {
             tableBody.append('<tr><td colspan="5" class="text-center text-muted">Нет данных</td></tr>');
         }
@@ -147,6 +149,7 @@ $(document).ready(function(){
         let attrList = $(modal['attrList']);
         let tableBody = $(modal['tableBody']);
         let totalSum = $(modal['totalSum']);
+        let tableSum = $(modal['tableSum']);
 
         if(!$.isEmptyObject(data)){
             alert('not empty');
@@ -200,6 +203,7 @@ $(document).ready(function(){
         let attrList = $(modal['attrList']);
         let tableBody = $(modal['tableBody']);
         let totalSum = $(modal['totalSum']);
+        let tableSum = $(modal['tableSum']);
 
         let sumAll = 0;
         let sumAttr = 0;
@@ -219,9 +223,9 @@ $(document).ready(function(){
         $('.summAttr').text(formatMoney(sumAttr) + ' ₽');
         totalSum.text(formatMoney(sumAll) + ' ₽');
 
-        // tableBody.find('.tariff').toArray().forEach((tariff) => {
+        tableBody.find('.tariff').toArray().forEach((tariff) => {
 
-        // });
+        });
     }
 });
 
