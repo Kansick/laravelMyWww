@@ -56,13 +56,13 @@
                                 <div class="col-md-4">
                                     <div class="card h-100 bg-dark-custom card-custom-hover">
                                         <div class="card-body">
-                                            <h5>{{ $item->title ?? "NOT FOUND" }}</h5>
-                                            <p class="fw-bold fs-5 text-uppercase">{{ $item->date_create->locale('ru')->isoFormat('DD MMMM YYYY') }}</p>
+                                            <h5 class="rent-report-title" title="{{ $item->title ?? 'NOT FOUND' }}">{{ $item->title ?? "NOT FOUND" }}</h5>
+                                            <p class="fw-bold fs-5 text-uppercase">{{ $item->period_date->locale('ru')->isoFormat('DD MMMM YYYY') }}</p>
                                             
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-white-50 small">Итого:</span>
                                                 <span class="text-success fw-bold fs-5">
-                                                    {{ number_format($item->result_sum, 0, '.', ' ') }} ₽
+                                                    {{ str_replace(',', '.', $item->result_sum) }} ₽
                                                 </span>
                                             </div>
                                             <hr class="border-secondary my-2">
@@ -115,7 +115,7 @@
 
 {{-- Сюда вставляется script теги для main.blade.php --}}
 @push('scripts')
-   @vite(['resources/js/rent_index.js'])
+   @vite(['resources/js/services/rent/rent_index.js'])
 @endpush
 
 @include('services.rent.modalRentView')

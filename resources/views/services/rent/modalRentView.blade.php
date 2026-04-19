@@ -2,8 +2,14 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content bg-dark-custom border-secondary">
             <div class="modal-header border-secondary">
-                <h5 class="modal-title text-white fw-bold" id="modalTitle">Загрузка...</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title text-white fw-bold rent-modal-title me-2" id="modalTitle">
+                    Загрузка...
+                </h5>
+
+                <div class="ms-auto d-flex align-items-center gap-3 flex-shrink-0">
+                    <span class="text-white-50 small text-nowrap" id="modalPeriodDate"></span>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             </div>
             
             <div class="modal-body text-white">
@@ -18,7 +24,7 @@
                     <div class="row g-4">
                         <!-- Постоянные расходы -->
                         <div class="col-md-12">
-                            <div id="attributesList">
+                            <div id="fixedCharges">
                                 
                             </div>
                         </div>

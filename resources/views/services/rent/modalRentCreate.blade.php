@@ -2,8 +2,12 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content bg-dark-custom border-secondary">
             <div class="modal-header border-secondary">
-                <input type="text" class="form-control bg-dark-custom" id="modalTitle" placeholder="Название">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <input type="text" class="form-control bg-dark-custom me-2" id="modalTitle" placeholder="Название">
+                <div class="ms-auto d-flex align-items-center gap-2">
+                    <span class="text-white-50 small text-nowrap" id="modalPeriodDateFormatted">Дата отчета</span>
+                    <input type="date" class="form-control form-control-sm bg-dark-custom text-white border-secondary" id="modalPeriodDate" style="width: 150px;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
             </div>
             
             <div class="modal-body text-white">
@@ -18,13 +22,13 @@
                     <div class="row g-4">
                         <!-- Постоянные расходы -->
                         <div class="col-md-12">
-                            <div id="attributesList"></div>
+                            <div id="fixedCharges"></div>
                             <span class="text-white d-flex justify-content-start mt-2 mb-2">
                                 <span class="">Сумма:</span>
-                                <span class="fw-bold ms-2 summAttr">0 ₽</span>
+                                <span class="fw-bold ms-2 amountFixedCharges">0 ₽</span>
                             </span>
-                            <button type="button" class="btn btn-outline-red mt-2" id="btnAddAttr">Добавить</button>
-                            <button type="button" class="btn btn-outline-red mt-2" id="btnRemoveAttr">Удалить</button>
+                            <button type="button" class="btn btn-outline-red mt-2" id="btnFixedChargeAdd">Добавить</button>
+                            <button type="button" class="btn btn-outline-red mt-2" id="btnFixedChargeRemove">Удалить</button>
                         </div>
 
                         <!-- Счетчики -->
