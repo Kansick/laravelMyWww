@@ -7,7 +7,7 @@
         <div class="container-fluid mx-auto" style="width: 1200px">
         @foreach($menuItems as $item)
             @if(isset($item['type']) && $item['type'] == "logo")
-                <a class="navbar-brand text-uppercase me-5" href="/">{{ $item['title'] ?? "NOT FOUND TEXT" }}</a>
+                <a class="navbar-brand text-uppercase me-5 main-color" href="/">{{ $item['title'] ?? "NOT FOUND TEXT" }}</a>
             @endif
         @endforeach
         <div class="collapse navbar-collapse">
@@ -36,12 +36,12 @@
     @if($isActive)
         @if(!$hasDropdown)
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ $item['url'] ?? '#' }}">{{ $item['title'] ?? "NOT FOUND" }}</a>
+                <a class="nav-link main-color" aria-current="page" href="{{ $item['url'] ?? '#' }}">{{ $item['title'] ?? "NOT FOUND" }}</a>
             </li>
         @endif
         @if($hasDropdown)
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-uppercase" href="{{ $item['url'] ?? '#' }}" id="navbarDropdownMenuLink_{{$index}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-uppercase main-color" href="{{ $item['url'] ?? '#' }}" id="navbarDropdownMenuLink_{{$index}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ $item['title'] ?? "NOT FOUND"}}
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 3L5 7L9 3" stroke="white" stroke-width="1.5"></path>
@@ -51,7 +51,7 @@
                     @foreach($item['childs'] as $child)
                         @if(isset($child['active']) && !empty($child['active']))
                             @if($child['active'])
-                                <li><a class="dropdown-item text-uppercase" href="{{ $child['url'] ?? '#' }}">{{ $child['title'] ?? "NOT FOUND"}}</a></li>
+                                <li><a class="dropdown-item text-uppercase main-color" href="{{ $child['url'] ?? '#' }}">{{ $child['title'] ?? "NOT FOUND"}}</a></li>
                             @endif
                         @endif
                     @endforeach

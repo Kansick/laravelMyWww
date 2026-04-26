@@ -12,10 +12,10 @@
             
             <div class="modal-body text-white">
                 <div id="modalLoader" class="text-center py-5">
-                    <div class="spinner-border text-primary" role="status">
+                    <div class="spinner-border loader-color" role="status">
                         <span class="visually-hidden">Загрузка...</span>
                     </div>
-                    <p class="mt-2 text-muted">Получаем данные...</p>
+                    <p class="mt-2 text-muted title-loader">Получаем данные...</p>
                 </div>
 
                 <div id="modalContent" style="display:none;">
@@ -65,7 +65,7 @@
             <div class="modal-footer border-secondary">
                 <div class="me-auto">
                     <span class="text-white-50 small d-block">Итоговая сумма:</span>
-                    <span class="text-success fw-bold fs-4" id="modalTotalSum">0 ₽</span>
+                    <span class="fw-bold fs-4" id="modalTotalSum">0 ₽</span>
                 </div>
                 <button type="button" class="btn btn-outline-red" id="btnCreate">Создать</button>
                 <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Закрыть</button>

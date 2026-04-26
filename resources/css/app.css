@@ -11,9 +11,35 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* 
+    Основной цвет (Кнопки, шапка элементы, загаловки, borders)
+*/
+
+:root {
+    --main-color-rgb: 235, 65, 232;
+}
+
+.main-font-rennie {
+    font-family: 'MainFontRennie', sans-serif !important;
+}
+
+.main-color {
+    color: #EB41E8 !important;
+    border-color: #EB41E8 !important;
+}
+
+.main-background-color {
+    background-color: #EB41E8 !important;
+}
+
+.loader-color {
+    --bs-text-opacity: 1;
+    color: rgba(var(--main-color-rgb),var(--bs-text-opacity)) !important;
+}
+
 [data-bs-theme="dark"] body {
-    background-color: #0A0A0A;
-    color: #a1a09a;
+    background-color: #121211 !important;
+    color: #fff;
 }
 
 .bg-dark-custom {
@@ -28,15 +54,20 @@
         opacity: 1;
         visibility: visible;
     }
+
+    /* Цвет лого при наведении */
+    a.navbar-brand:hover {
+        color: #fff !important;
+    }
     
     /* Цвет пункта меню при наведении */
     .nav-item.dropdown:hover > .nav-link {
-        color: #A52A2A !important;
+        color: #fff !important;
     }
     
     /* Цвет под пункта меню при наведении */
     .nav-item.dropdown:hover > .dropdown-menu .dropdown-item:hover {
-        color: #A52A2A !important;
+        color: #fff !important;
         background-color: transparent;
     }
 }
@@ -46,13 +77,12 @@
 }
 
 .navbar-brand {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 900 !important;
+    font-family: 'MainFontRennie', sans-serif !important;
+    font-weight: bold;
+    font-size: large;
     line-height: 1 !important;
     text-transform: uppercase !important;
     text-decoration: none !important;
-    color: #ffffff !important;
     height: 36px;
     display: flex;
     align-items: center;
@@ -69,7 +99,6 @@
     line-height: 1 !important;
     text-transform: uppercase !important;
     text-decoration: none !important;
-    color: #ffffff !important;
     height: 36px;
     display: flex;
     align-items: center;
@@ -83,48 +112,41 @@
     font-size: 12px !important;
     font-weight: 900 !important;
     text-transform: uppercase !important;
-    color: #ffffff !important;
     padding: 8px 20px;
 }
 
-.border-red {
-    border: 2px solid #A52A2A !important;
-}
-
 .btn-outline-red {
-    border: 2px solid #ffffff !important;
+    border: 1px solid #fff !important;
     font-family: 'Montserrat', sans-serif !important;
     font-size: 12px !important;
     font-weight: 900 !important;
     line-height: 2 !important;
     text-transform: uppercase !important;
     text-decoration: none !important;
-    color: #ffffff !important;
+    color: #fff !important;
     transition: 0.2s;
 }
 
 .btn-outline-red:hover {
-    border: 2px solid #A52A2A !important;
-    color: #A52A2A !important;
+    border: 1px solid #EB41E8 !important;
+    color: #EB41E8 !important;
 }
 
 .card-custom-hover {
-    border: 2px solid transparent !important;
+    border: 1px solid transparent !important;
     transition: 0.2s;
 }
 
 .card-custom-hover:hover {
-    border: 2px solid #A52A2A !important;
+    border: 1px solid #EB41E8 !important;
 }
 
 .rent-report-title {
     min-height: 48px;
     margin-bottom: 8px;
-
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-
     overflow: hidden;
 }
 
@@ -132,7 +154,6 @@
     min-width: 0;
     max-width: 100%;
     margin-bottom: 0;
-
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -3,7 +3,7 @@ return [
     'navbar' => [
         [
             'type' => 'logo',
-            'title' => 'My services',
+            'title' => 'Сайт сервис',
             'url' => '/',
             'active' => true,
         ],
@@ -18,14 +18,34 @@ return [
                     'title' => 'Расчёт аренды',
                     'url' => '/services/rent/',
                     'active' => true
+                ]
+            ]
+        ],
+        [
+            'type' => 'menu',
+            'title' => 'Тир листы',
+            'url' => '/tiers/',
+            'active' => true,
+            'childs' => [
+                [
+                    'type' => 'child',
+                    'title' => 'Игры',
+                    'url' => '/tiers/games/',
+                    'active' => true
                 ],
                 [
                     'type' => 'child',
-                    'title' => 'Пароли',
-                    'url' => '/services/passwords/',
+                    'title' => 'Мультимедиа',
+                    'url' => '/tiers/media/',
                     'active' => true
-                ]
-            ],
-        ],
+                ],
+                [
+                    'type' => 'child',
+                    'title' => 'Книги',
+                    'url' => '/tiers/books/',
+                    'active' => true
+                ],
+            ]
+        ]
     ],
 ];

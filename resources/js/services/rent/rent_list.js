@@ -106,7 +106,7 @@ $(document).ready(function(){
             tableBody.append('<tr><td colspan="6" class="text-center text-muted">Нет данных</td></tr>');
         }
 
-        totalSum.text(parseFloat(data.result_sum) || 0 + ' ₽');
+        totalSum.text(`${formatMoney(data.result_sum)} ₽`);
     }
 
     function formatMoney(amount) {
@@ -121,9 +121,12 @@ $(document).ready(function(){
     $('.btn-create-rent').off().on('click', function(e){
         e.preventDefault();
         let modal = modalsData[$(this).data('bs-target')];
-        $(modal['loader']).show();
+        let loader = $(modal['loader']);
+        let loaderTitle = loader.find('.title-loader');
+        loader.show();
+        loaderTitle.text("Получаем данные...");
         $(modal['content']).hide();
-        $(modal['title']).text('Загрузка...');
+        $(modal['title']).text('');
         
         modalBootstrap[$(this).data('bs-target')].show();
 
@@ -136,13 +139,13 @@ $(document).ready(function(){
             },
             success: function(data) {
                 createRent(data, modal);
-                $(modal['loader']).hide();
+                loader.hide();
                 $(modal['content']).show();
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', error);
                 $(modal['title']).text('Ошибка');
-                $(modal['loader']).html(`<p class="text-danger">Не удалось загрузить: ${xhr.status} ${error}</p>`);
+                loaderTitle.text(`Не удалось загрузить`);
             }
         });
     });
@@ -156,6 +159,9 @@ $(document).ready(function(){
         let tableSum = $(modal['tableSum']);
         let periodDate = $(modal['periodDate']);
         let periodDateFormatted = $(modal['periodDateFormatted']);
+
+        let loader = $(modal['loader']);
+        let loaderTitle = loader.find('.title-loader');
 
         tableBody.empty();
         fixedCharges.empty();
@@ -200,7 +206,7 @@ $(document).ready(function(){
         }
 
         $('#btnFixedChargeAdd').off().on('click', function(){
-            fixedCharges.prepend(`
+            fixedCharges.append(`
                 <span class="text-white d-flex justify-content-start fixedChargeLine">
                     <input type="text" class="form-control key me-2 mt-2 bg-dark-custom" placeholder="Ключ">
                     <input type="text" class="form-control value mt-2 bg-dark-custom" placeholder="Значение">
@@ -245,6 +251,10 @@ $(document).ready(function(){
                 alert("Заполни название");
                 return;
             }
+
+            loader.show();
+            loaderTitle.text("Создаём отчет...");
+            $(modal['content']).hide();
 
             $.ajax({
                 url: '/api/rent/create',

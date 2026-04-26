@@ -10,16 +10,16 @@
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/fonts/fonts.css'])
     @endif
 </head>
 <body class="d-flex flex-column min-vh-100 m-0 p-0">
     @include('partials.menu', ['menuItems' => config('menu.navbar')])
 
     <main class="flex-grow-1" style="padding-top: 56px;">
-        <section class="bg-dark-custom text-white d-flex align-items-center justify-content-center" style="min-height: 300px;">
+        <section class="bg-dark-custom text-white d-flex align-items-center justify-content-center" style="min-height: 200px;">
             <div class="text-center">
-                <h1 class="display-4 fw-bold mb-3">@yield('header-page-main')</h1>
+                <h1 class="display-4 fw-bold mb-3 main-color main-font-rennie">@yield('header-page-main')</h1>
                 <p class="lead text-white-50">@yield('sub-header-page-main')</p>
             </div>
         </section>

@@ -1,9 +1,9 @@
 @extends('layouts.main.main')
 
 {{-- 2. Задаем заголовок страницы (опционально) --}}
-@section('title', 'Аренда')
+@section('title', 'Расчёт аренды')
 
-@section('header-page-main', 'Рассчет аренды')
+@section('header-page-main', 'Расчёт аренды')
 @section('sub-header-page-main', 'Здесь можно посмотреть все отчеты по квартплате а так же посчитать новую')
 
 {{-- 3. Пишем контент, который вставится вместо @yield('content') в макете --}}
@@ -61,7 +61,7 @@
                                             
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="text-white-50 small">Итого:</span>
-                                                <span class="text-success fw-bold fs-5">
+                                                <span class="fw-bold fs-5">
                                                     {{ str_replace(',', '.', $item->result_sum) }} ₽
                                                 </span>
                                             </div>
@@ -115,7 +115,7 @@
 
 {{-- Сюда вставляется script теги для main.blade.php --}}
 @push('scripts')
-   @vite(['resources/js/services/rent/rent_index.js'])
+   @vite(['resources/js/services/rent/rent_list.js'])
 @endpush
 
 @include('services.rent.modalRentView')
